@@ -19,14 +19,13 @@ public class GridController : MonoBehaviour
     {
         AddToDictionary();
         GridSystem();
-        //RandomBirds();
     }
 
     void Update()
     {
 
     }
-    private void GridSystem()
+    private void GridSystem() // For generating Grid
     {
         planeArray = new GameObject[numOfCols, numOfRows];
 
@@ -35,13 +34,14 @@ public class GridController : MonoBehaviour
             for (int j = 0; j < numOfRows; j++)
             {
                 planeArray[i, j] = Instantiate(planePrefab, new Vector3(i * 2.5f * gapValue, 0.1f, j * 2.5f * gapValue), planePrefab.transform.rotation);
-                TextMeshProUGUI textObj = Instantiate(birdText, new Vector3(i * 2.5f * gapValue, 0.15f, j * 2.5f * gapValue), birdText.transform.rotation);
-                textObj.transform.SetParent(canvasPrefab.transform);
-                birdText.text = RandomBirds();
+
+                TextMeshProUGUI textObj = Instantiate(birdText, new Vector3(i * 2.5f * gapValue, 0.15f, j * 2.5f * gapValue), birdText.transform.rotation);//Instantiating text objects
+                textObj.transform.SetParent(canvasPrefab.transform); // Setting the canvas as parent of the text object created
+                birdText.text = RandomBirds(); // For setting the text of the text object created
             }
         }
     }
-    private void AddToDictionary()
+    private void AddToDictionary() // Adding elements to dictionary
     {
         dicObject.Add(0, "Sparrow");
         dicObject.Add(1, "Crow");
@@ -55,7 +55,7 @@ public class GridController : MonoBehaviour
         dicObject.Add(9, "Eagle");
         dicObject.Add(10, "Ostrich");
     }
-    private string RandomBirds()
+    private string RandomBirds() // For getting random entry from dictionary
     {
         var randomKey = Random.Range(0, dicObject.Count);
         return dicObject[randomKey].ToString();

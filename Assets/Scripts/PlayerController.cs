@@ -34,14 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerInput();
     }
-    private void CorrectLerpMovement() // Correct way to use lerp
-    {
-        elapsedTime += Time.deltaTime;
-        float percentageCompleted = elapsedTime / desiredDuration;
-
-        transform.position = Vector3.Lerp(startPosition, endPosition, percentageCompleted);
-    }
-    private void PlayerInput()
+    private void PlayerInput() // Player Input controller
     {
         if (Input.GetKeyDown(KeyCode.W) && !isMoving && (transform.position.z + 1 * gapValue * 2.5f <= numOfCols * gapValue * 2.5f))
         {
@@ -60,7 +53,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PlayerMovement((Vector3.right) * gapValue * 2.5f));
         }
     }
-    private IEnumerator PlayerMovement(Vector3 direction)
+    private IEnumerator PlayerMovement(Vector3 direction) // Movement on the base of player input
     {
         isMoving = true;
         float elapsedTime = 0;
